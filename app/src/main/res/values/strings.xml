@@ -3,4 +3,5 @@
     <string name="officers">OFFICERS</string>
     <string name="teams">TEAMS</string>
     <string name="interventions">INTERVENTIONS</string>
+    <string name="back_button">Back</string>
 </resources>
