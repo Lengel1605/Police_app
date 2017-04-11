@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Police_app</string>
+    <string name="officers">OFFICERS</string>
+    <string name="teams">TEAMS</string>
+    <string name="interventions">INTERVENTIONS</string>
+</resources>
