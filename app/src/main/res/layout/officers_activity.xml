@@ -65,7 +65,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:text="OFFICERS"
+        android:text="OFFICER"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintHorizontal_bias="0.595"
         app:layout_constraintLeft_toLeftOf="parent"
