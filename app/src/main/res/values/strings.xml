@@ -4,4 +4,22 @@
     <string name="teams">TEAMS</string>
     <string name="interventions">INTERVENTIONS</string>
     <string name="back_button">Back</string>
+    <string name="addOfficer">ADD</string>
+    <string name="addTeam">ADD</string>
+    <string name="addIntervention">ADD</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="phone">Phone</string>
+    <string name="commissioner">Police Commissioner</string>
+    <string name="assistantChief">Assistant Chief</string>
+    <string name="deputyChief">Deputy Chief</string>
+    <string name="inspector">Inspector</string>
+    <string name="lieutenant">Lieutenant</string>
+    <string name="major">Major</string>
+    <string name="colonel">Colonel</string>
+    <string name="sergeant">Sergeant</string>
+    <string name="detective">Detective</string>
+    <string name="officer">Officer</string>
+    <string name="captain">Captain</string>
+    <string name="other">Other</string>
 </resources>

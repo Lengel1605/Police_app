@@ -39,6 +39,30 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity android:name=".DisplayNewOfficerActivity"
+            android:parentActivityName=".DisplayOfficersActivity" >
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DisplayOfficersActivity" />
+        </activity>
+
+        <activity android:name=".DisplayNewTeamActivity"
+            android:parentActivityName=".DisplayTeamsActivity" >
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DisplayOfficersActivity" />
+        </activity>
+
+        <activity android:name=".DisplayNewInterventionActivity"
+            android:parentActivityName=".DisplayInterventionsActivity" >
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DisplayOfficersActivity" />
+        </activity>
+
 
 
 
