@@ -38,7 +38,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // Teams Table Columns names
         private static final String TEAMS_ID = "id_teams";
-    private static final String TEAMS_CHEF = "teams_chef";
+    private static final String TEAMS_CHIEF = "teams_chef";
     private static final String TEAMS_COMPOSANTS = "teams_composants";
 
 
@@ -63,12 +63,12 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_OFFICERS_TABLE = "CREATE TABLE " + TABLE_OFFICERS + "("
-        + TEAMS_ID + " INTEGER PRIMARY KEY," + TEAMS_CHEF + " TEXT,"
+        String CREATE_OFFICERS_TABLE = "CREATE TABLE " + TABLE_TEAMS + "("
+        + TEAMS_ID + " INTEGER PRIMARY KEY," + TEAMS_CHIEF + " TEXT,"
         + TEAMS_COMPOSANTS + " TEXT" + ")";
         db.execSQL(CREATE_OFFICERS_TABLE);
 
-        String CREATE_TEAMS_TABLE = "CREATE TABLE " + TABLE_TEAMS + "("
+        String CREATE_TEAMS_TABLE = "CREATE TABLE " + TABLE_OFFICERS + "("
                 + OFFICERS_ID + " INTEGER PRIMARY KEY," + OFFICERS_FIRSTNAME + " TEXT,"
                 + OFFICERS_LASTNAME + " TEXT" + ")";
         db.execSQL(CREATE_OFFICERS_TABLE);
@@ -112,7 +112,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
     // Getting one officer
-    /**public Officer getShop(int id) {
+    /**public Officer getOfficer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
 
@@ -132,7 +132,7 @@ public class DBHandler extends SQLiteOpenHelper {
 // return shop
         return officer;
     }  **/
-    // Getting All Shops
+    // Getting All Officers
     public List<Officer> getAllOfficers() {
         List<Officer> officersList = new ArrayList<Officer>();
 // Select All Query
@@ -155,7 +155,7 @@ public class DBHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
-// return contact list
+// return officer list
         return officersList;
     }
     // Getting officers Count
@@ -183,8 +183,8 @@ public class DBHandler extends SQLiteOpenHelper {
         new String[]{String.valueOf(officer.getOfficerId())});
     }
 
-    // Deleting a shop
-    public void deleteShop(Officer officer) {
+    // Deleting a officer
+    public void deleteOfficer(Officer officer) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_OFFICERS, OFFICERS_ID + " = ?",
         new String[] { String.valueOf(officer.getOfficerId()) });

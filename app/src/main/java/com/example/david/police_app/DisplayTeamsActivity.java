@@ -17,10 +17,17 @@ public class DisplayTeamsActivity extends AppCompatActivity {
 
     }
 
-    /** Called when the user taps the officers button**/
+    /** Called when the user taps the add_team button**/
     public void showNewTeam(View view){
         //show officers
         Intent intent = new Intent(this, DisplayNewTeamActivity.class);
+        startActivity(intent);
+    }
+
+    /** Called when the user taps the show_team button**/
+    public void showInfosTeam(View view){
+        //show teams
+        Intent intent = new Intent(this, DisplayInfosTeamActivity.class);
         startActivity(intent);
     }
 

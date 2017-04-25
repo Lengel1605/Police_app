@@ -18,12 +18,20 @@ public class DisplayOfficersActivity extends AppCompatActivity {
     }
 
 
-    /** Called when the user taps the officers button**/
+    /** Called when the user taps the add_officers button**/
     public void showNewOfficer(View view){
         //show officers
         Intent intent = new Intent(this, DisplayNewOfficerActivity.class);
         startActivity(intent);
     }
+
+    /** Called when the user taps the view_officers button**/
+    public void showInfosOfficer(View view){
+        //show officers
+        Intent intent = new Intent(this, DisplayInfosOfficerActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }

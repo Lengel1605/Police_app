@@ -17,4 +17,92 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/intervention_name_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="49dp" />
+
+    <RadioGroup
+        android:id="@+id/intervention_priority_radioGroup"
+        android:layout_width="125dp"
+        android:layout_height="56dp"
+        tools:layout_editor_absoluteX="234dp"
+        tools:layout_editor_absoluteY="66dp">
+
+        <RadioButton
+            android:id="@+id/red_priority_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/orange_priority_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/green_priority_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RadioButton" />
+    </RadioGroup>
+
+    <RadioButton
+        android:id="@+id/intervention_finished_radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        tools:layout_editor_absoluteX="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="226dp" />
+
+    <EditText
+        android:id="@+id/intervention_date_begin_editText"
+        android:layout_width="155dp"
+        android:layout_height="37dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteY="443dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <EditText
+        android:id="@+id/intervention_date_end_editText"
+        android:layout_width="176dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteY="443dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <EditText
+        android:id="@+id/intervention_localisation_editText"
+        android:layout_width="389dp"
+        android:layout_height="55dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="523dp" />
+
+    <EditText
+        android:id="@+id/intervention_description_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="244dp" />
+
 </android.support.constraint.ConstraintLayout>

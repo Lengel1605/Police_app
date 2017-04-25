@@ -17,10 +17,17 @@ public class DisplayInterventionsActivity extends AppCompatActivity {
 
     }
 
-    /** Called when the user taps the officers button**/
+    /** Called when the user taps the add_intervention button**/
     public void showNewIntervention(View view){
         //show officers
         Intent intent = new Intent(this, DisplayNewInterventionActivity.class);
+        startActivity(intent);
+    }
+
+    /** Called when the user taps the show_intervention button**/
+    public void showInfosIntervention(View view){
+        //show intervention
+        Intent intent = new Intent(this, DisplayInfoInterventionActivity.class);
         startActivity(intent);
     }
 

@@ -13,6 +13,7 @@ public class DisplayNewOfficerActivity extends AppCompatActivity {
         setContentView(R.layout.newofficer_activity);
 
 
+
     }
 
 }

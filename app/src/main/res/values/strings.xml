@@ -4,9 +4,9 @@
     <string name="teams">TEAMS</string>
     <string name="interventions">INTERVENTIONS</string>
     <string name="back_button">Back</string>
-    <string name="addOfficer">ADD</string>
-    <string name="addTeam">ADD</string>
-    <string name="addIntervention">ADD</string>
+    <string name="addOfficer">Add Officer</string>
+    <string name="addTeam">Add Team</string>
+    <string name="addIntervention">Add Intervention</string>
     <string name="firstname">Firstname</string>
     <string name="lastname">Lastname</string>
     <string name="phone">Phone</string>
@@ -22,4 +22,5 @@
     <string name="officer">Officer</string>
     <string name="captain">Captain</string>
     <string name="other">Other</string>
+    <string name="teamNumber">Team Number</string>
 </resources>
