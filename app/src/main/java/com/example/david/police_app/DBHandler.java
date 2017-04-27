@@ -9,9 +9,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DBHandler extends SQLiteOpenHelper {
 
     // Database Version
@@ -58,8 +55,9 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String DETAILS_LOCALISATION = "details_localisation";
 
 
-    public DBHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -107,69 +105,27 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(OFFICERS_PHONE, officer.getOfficerPhone()); // officer firstname
         values.put(OFFICERS_TYPE, officer.getOfficerType()); // officer firstname
 
-// Inserting Row
+        // Inserting Row
         db.insert(TABLE_OFFICERS, null, values);
         db.close(); // Closing database connection
     }
-    // Getting one officer
-    /**public Officer getOfficer(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
 
-
-        Cursor cursor = db.query(TABLE_OFFICERS,
-                new String[]{
-                             OFFICERS_ID,OFFICERS_FIRSTNAME, OFFICERS_LASTNAME, OFFICERS_PHONE, OFFICERS_TYPE
-                            },
-                OFFICERS_ID + "=?",
-                new String[] {String.valueOf(id) },
-                        null, null, null, null, null);
-
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        Officer officer = new Officer(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getString(4));
-// return shop
-        return officer;
-    }  **/
     // Getting All Officers
-    public List<Officer> getAllOfficers() {
-        List<Officer> officersList = new ArrayList<Officer>();
-// Select All Query
-        String selectQuery = "SELECT * FROM " + TABLE_OFFICERS;
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+    public Cursor showOfficers(){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = ("SELECT * FROM " + TABLE_OFFICERS + " WHERE 1 ORDER BY " + OFFICERS_LASTNAME + ";");
+        Cursor c = db.rawQuery(query, null);
 
-// looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Officer officer = new Officer();
-                officer.setOfficerId(cursor.getString(0));
-                officer.setOfficerFirstname(cursor.getString(1));
-                officer.setOfficerLastname(cursor.getString(2));
-                officer.setOfficerPhone(cursor.getString(3));
-                officer.setOfficerType(cursor.getString(4));
-// Adding contact to list
-                officersList.add(officer);
-            } while (cursor.moveToNext());
+        if (c != null) {
+            c.moveToFirst();
         }
 
-// return officer list
-        return officersList;
+        return c;
     }
-    // Getting officers Count
-    public int getOfficersCount() {
-        String countQuery = "SELECT * FROM " + TABLE_OFFICERS;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-        cursor.close();
 
-// return count
-        return cursor.getCount();
-    }
     // Updating a officer
-    public int updateShop(Officer officer) {
+    public void updateOfficer(Officer officer) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -178,8 +134,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(OFFICERS_PHONE, officer.getOfficerPhone());
         values.put(OFFICERS_TYPE, officer.getOfficerType());
 
-// updating row
-        return db.update(TABLE_OFFICERS, values, OFFICERS_ID + " = ?",
+        // updating row
+        db.update(TABLE_OFFICERS, values, OFFICERS_ID + " = ?",
         new String[]{String.valueOf(officer.getOfficerId())});
     }
 
