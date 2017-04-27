@@ -7,10 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.david.police_app.NewDataBaseHelper;
 import com.example.david.police_app.NewPoliceDB;
-import Constructors.Officer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Constructors.Detail;
+import Constructors.Intervention;
+import Constructors.Officer;
+import Constructors.Team;
 
 /**
  * Created by David on 27.04.2017.
@@ -146,13 +150,13 @@ public class OfficerDataSource {
         //get all records of the officer
         List<Team> teams = tds.getAllTeamsByOfficer(id);
         List<Intervention> interventions = ids.getAllInterventionsByOfficer(id);
-        List<Details> details = dds.getAllDetailsByOfficer(id);
+        List<Detail> details = dds.getAllDetailsByOfficer(id);
 
         for (Team team : teams) {
             tds.deleteTeam(team.getIdTeam());
         }
 
-        for (Interventin intervention : interventions) {
+        for (Intervention intervention : interventions) {
             ids.deleteIntervention(intervention.getIdIntervention());
         }
 

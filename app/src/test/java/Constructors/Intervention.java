@@ -5,4 +5,7 @@ package Constructors;
  */
 
 public class Intervention {
+    public Object getIdIntervention() {
+        return idIntervention;
+    }
 }

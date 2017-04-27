@@ -5,4 +5,8 @@ package Constructors;
  */
 
 public class Detail {
+    public Object getIdDetail() {
+        int idDetail;
+        return idDetail;
+    }
 }

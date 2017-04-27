@@ -1,17 +1,19 @@
 package Constructors;
 
+import java.io.Serializable;
+
 /**
  * Created by David on 24.04.2017.
  */
 
-public class Officer {
 
-    private int id_Officer;
+
+public class Officer implements Serializable {
+    private long id_Officer;
     private String Firstname;
     private String Lastname;
     private String Phone;
     private String Type;
-
     public Officer(){
 
     }
@@ -25,36 +27,50 @@ public class Officer {
         this.Type = Type;
 
     }
-    public void setIdOfficer(int Firstname){
-        this.Firstname=Firstname;
+    public long getId_Officer() {
+        return id_Officer;
     }
-    public String getIdOfficer(){
+
+    public void setId_Officer(long id_Officer) {
+        this.id_Officer = id_Officer;
+    }
+
+    public String getFirstname() {
         return Firstname;
     }
-    public void setFirstname(String Firstname){
-        this.Firstname=Firstname;
+
+    public void setFirstname(String firstname) {
+        Firstname = firstname;
     }
-    public String getFirstname(){
-        return Firstname;
+
+    public String getLastname() {
+        return Lastname;
     }
-    public void setLastname(String Firstname){
-        this.Firstname=Firstname;
+
+    public void setLastname(String lastname) {
+        Lastname = lastname;
     }
-    public String getLastname(){
-        return Firstname;
+
+    public String getPhone() {
+        return Phone;
     }
-    public void setPhone(String Firstname){
-        this.Firstname=Firstname;
+
+    public void setPhone(String phone) {
+        Phone = phone;
     }
-    public String getPhone(){
-        return Firstname;
+
+    public String getType() {
+        return Type;
     }
-    public void setType(String Firstname){
-        this.Firstname=Firstname;
+
+    public void setType(String type) {
+        Type = type;
     }
-    public String getType(){
-        return Firstname;
-    }
+
+
+
+
+
 
 
 }
