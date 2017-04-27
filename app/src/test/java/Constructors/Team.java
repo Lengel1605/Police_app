@@ -6,67 +6,49 @@ import java.io.Serializable;
  * Created by David on 24.04.2017.
  */
 
+
+
 public class Team implements Serializable {
 
-    public long getId_Officer() {
-        return id_Officer;
-    }
+    private long idTeam;
+    private String TeamChief;
+    private String teamComposant;
 
-    public void setId_Team(long id_Officer) {
-        this.id_Officer = id_Officer;
-    }
-
-    public String getFirstname() {
-        return Firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        Firstname = firstname;
-    }
-
-    public String getLastname() {
-        return Lastname;
-    }
-
-    public void setLastname(String lastname) {
-        Lastname = lastname;
-    }
-
-    public String getPhone() {
-        return Phone;
-    }
-
-    public void setPhone(String phone) {
-        Phone = phone;
-    }
-
-    public String getType() {
-        return Type;
-    }
-
-    public void setType(String type) {
-        Type = type;
-    }
-
-    private long id_Officer;
-    private String Firstname;
-    private String Lastname;
-    private String Phone;
-    private String Type;
-
-    public Officer(){
+    public Team(){
 
     }
-    public Officer(int id_Officer, String Firstname, String Lastname,
-                   String Phone, String Type){
+    public Team(long idTeam, String TeamChief, String teamComposant){
 
-        this.id_Officer = id_Officer;
-        this.Firstname = Firstname;
-        this.Lastname = Lastname;
-        this.Phone = Phone;
-        this.Type = Type;
-
+        this.idTeam = idTeam;
+        this.TeamChief = TeamChief;
+        this.teamComposant = teamComposant ;
     }
+
+    public long getIdTeam() {
+        return idTeam;
+    }
+
+    public void setIdTeam(long idTeam) {
+        this.idTeam = idTeam;
+    }
+
+    public String getTeamChief() {
+        return TeamChief;
+    }
+
+    public void setTeamChief(String teamChief) {
+        TeamChief = teamChief;
+    }
+
+    public String getTeamComposant() {
+        return teamComposant;
+    }
+
+    public void setTeamComposant(String teamComposant) {
+        this.teamComposant = teamComposant;
+    }
+
+
 
 
 
