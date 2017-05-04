@@ -9,7 +9,7 @@ public class NewDataBaseHelper extends SQLiteOpenHelper{
 
     //Infos about database
     private static final String DATABASE_NAME = "Police.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static NewDataBaseHelper instance;
 
 
@@ -31,22 +31,20 @@ public class NewDataBaseHelper extends SQLiteOpenHelper{
 //test
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(NewPoliceDB.TableOfficer.CREATE_TABLE_OFFICER);
-        db.execSQL(NewPoliceDB.TableTeam.CREATE_TABLE_TEAM);
         db.execSQL(NewPoliceDB.TableIntervention.CREATE_TABLE_INTERVENTION);
-        db.execSQL(NewPoliceDB.TableDetail.CREATE_TABLE_DETAIL);
+        db.execSQL(NewPoliceDB.TableTeam.CREATE_TABLE_TEAM);
+        db.execSQL(NewPoliceDB.TableOfficer.CREATE_TABLE_OFFICER);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //drop old tables
-        db.execSQL("DROP TABLE IF EXISTS " + NewPoliceDB.TableOfficer.CREATE_TABLE_OFFICER);
-        db.execSQL("DROP TABLE IF EXISTS " + NewPoliceDB.TableTeam.CREATE_TABLE_TEAM);
-        db.execSQL("DROP TABLE IF EXISTS " + NewPoliceDB.TableIntervention.CREATE_TABLE_INTERVENTION);
-        db.execSQL("DROP TABLE IF EXISTS " + NewPoliceDB.TableDetail.CREATE_TABLE_DETAIL);
+                //drop old tables
+                db.execSQL("DROP TABLE IF EXISTS " + NewPoliceDB.TableOfficer.TABLE_OFFICER);
+                db.execSQL("DROP TABLE IF EXISTS " + NewPoliceDB.TableTeam.TABLE_TEAM);
+                db.execSQL("DROP TABLE IF EXISTS " + NewPoliceDB.TableIntervention.TABLE_INTERVENTION);
 
-        //create new tables/
-        onCreate(db);
+                //create new tables/
+                onCreate(db);
     }
 
 

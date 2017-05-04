@@ -14,17 +14,21 @@ public class Officer implements Serializable {
     private String Lastname;
     private String Phone;
     private String Type;
+    private int id_Team;
+
     public Officer(){
 
     }
     public Officer(int id_Officer, String Firstname, String Lastname,
-                   String Phone, String Type){
+                   String Phone, String Type,int id_Team){
 
         this.id_Officer = id_Officer;
         this.Firstname = Firstname;
         this.Lastname = Lastname;
         this.Phone = Phone;
         this.Type = Type;
+        this.id_Team=id_Team;
+
 
     }
     public long getId_Officer() {
@@ -67,6 +71,13 @@ public class Officer implements Serializable {
         Type = type;
     }
 
+    public int getId_Team() {
+        return id_Team;
+    }
+
+    public void setId_Team(int id_Team) {
+        this.id_Team = id_Team;
+    }
 
 
 
