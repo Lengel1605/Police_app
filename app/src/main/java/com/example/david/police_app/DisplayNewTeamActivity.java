@@ -117,10 +117,6 @@ public class DisplayNewTeamActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
     /** Called when officer click submit intervention button */
     public void submitTeam(View view) {
 

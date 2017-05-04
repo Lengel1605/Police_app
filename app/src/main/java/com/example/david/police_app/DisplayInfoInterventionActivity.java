@@ -1,10 +1,13 @@
 package com.example.david.police_app;
 
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
 /**
  * Created by David on 25.04.2017.
+ *
+ * The goal of this class is to manage the Information
  */
 
 public class DisplayInfoInterventionActivity extends AppCompatActivity{
@@ -13,14 +16,12 @@ public class DisplayInfoInterventionActivity extends AppCompatActivity{
     private String type;
     private int id;
 
-    /**@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newofficer_activity);
 
 
-
-
-    }**/
+    }
 
 }
