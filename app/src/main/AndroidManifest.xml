@@ -98,7 +98,7 @@
 
         <activity android:name=".DisplayInfoInterventionActivity"
             android:parentActivityName=".DisplayInterventionsActivity"
-            android:label="@string/info_officier">
+            android:label="@string/info_intervention">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

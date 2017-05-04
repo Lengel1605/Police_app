@@ -55,7 +55,12 @@ public class DisplayInterventionsActivity extends AppCompatActivity {
             button.setText(s);
             linearLayout.addView(button);
 
-
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showInfosIntervention(view);
+                }
+            });
 
         }
 

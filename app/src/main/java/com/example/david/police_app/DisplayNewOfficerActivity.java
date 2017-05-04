@@ -167,16 +167,8 @@ public class DisplayNewOfficerActivity extends AppCompatActivity {
                 ods.createOfficer(o1);
 
             }
-
-
-
         }
-
-
         startActivity(intent);
 
-
     }
-
-
 }
