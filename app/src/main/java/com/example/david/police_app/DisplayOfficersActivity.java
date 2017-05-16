@@ -8,15 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.lionel.police_app.backend.constructors.officerApi.model.Officer;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Constructors.Officer;
 import DataSource.InterventionDataSource;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
-
-
 
 
 public class DisplayOfficersActivity extends AppCompatActivity {
@@ -45,43 +44,42 @@ public class DisplayOfficersActivity extends AppCompatActivity {
 
         //insert officers
 /**
-        Officer o1 = new Officer(1, "David", "Cano",
-                "65165", "Officer");
-        Officer o2 = new Officer(1, "toto", "toto",
-                "65165", "Assistant Chief");
-        Officer o3 = new Officer(1, "titi", "titi",
-                "65165", "Major");
-
-        ods.createOfficer(o1);
-        ods.createOfficer(o2);
-        ods.createOfficer(o3);
+ Officer o1 = new Officer(1, "David", "Cano",
+ "65165", "Officer");
+ Officer o2 = new Officer(1, "toto", "toto",
+ "65165", "Assistant Chief");
+ Officer o3 = new Officer(1, "titi", "titi",
+ "65165", "Major");
+ ods.createOfficer(o1);
+ ods.createOfficer(o2);
+ ods.createOfficer(o3);
  **/
         officers=ods.getAllOfficers();
 
 
-            for(int i=0;i<officers.size();i++){
-                final Button button = new Button(this);
-                int btnId = (int) officers.get(i).getId_Officer();
-                String s = officers.get(i).getLastname();
-                button.setText(s);
-                button.setId(btnId);
-                //Ajout de l'action listener
+        for(int i=0;i<officers.size();i++){
+            final Button button = new Button(this);
+            long btnId = officers.get(i).getIdOfficer();
+            String s = officers.get(i).getLastname();
+            button.setText(s);
+            button.setId((int)btnId);
+            //Ajout de l'action listener
 
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        showOfficer(view);
-                    }
-                });
-                for(int j=i+1;j<officers.size();j++){
-                    if(officers.get(i).getPhone().equals(officers.get(j).getPhone())){
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showOfficer(view);
+                }
+            });
+            for(int j=i+1;j<officers.size();j++){
+                if(officers.get(i).getPhone().equals(officers.get(j).getPhone())){
 
-                        i=i+1;
-                    }
+                    i=i+1;
+                }
 
             }
 
-                linearLayout.addView(button);
+            linearLayout.addView(button);
 
         }
     }
@@ -113,4 +111,3 @@ public class DisplayOfficersActivity extends AppCompatActivity {
 
 
 }
-

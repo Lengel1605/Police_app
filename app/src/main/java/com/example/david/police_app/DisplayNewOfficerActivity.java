@@ -12,11 +12,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.lionel.police_app.backend.constructors.officerApi.model.Officer;
+import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Constructors.Officer;
-import Constructors.Team;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
 
@@ -52,7 +53,7 @@ public class DisplayNewOfficerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newofficer_activity);
 
-       linearLayout = (LinearLayout) findViewById(R.id.team);
+        linearLayout = (LinearLayout) findViewById(R.id.team);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         db = new NewDataBaseHelper(this);
@@ -77,7 +78,7 @@ public class DisplayNewOfficerActivity extends AppCompatActivity {
     public void submitOfficer(View view) {
 
 
-       intent = new Intent(this, DisplayOfficersActivity.class);
+        intent = new Intent(this, DisplayOfficersActivity.class);
 
         OfficerDataSource ods = new OfficerDataSource(this);
 
@@ -124,7 +125,7 @@ public class DisplayNewOfficerActivity extends AppCompatActivity {
         captain_button = (RadioButton) findViewById(R.id.captain_button);
 
         type ="";
-    if(officer_button.isChecked());
+        if(officer_button.isChecked());
         {
             type = "Officer";
         }
@@ -146,10 +147,10 @@ public class DisplayNewOfficerActivity extends AppCompatActivity {
         }
 
 
-       rbl = new ArrayList<CheckBox>();///////////////////////////////////////////
+        rbl = new ArrayList<CheckBox>();///////////////////////////////////////////
 
 
-       llt = (LinearLayout) findViewById(R.id.team);
+        llt = (LinearLayout) findViewById(R.id.team);
 
 
 
@@ -158,17 +159,30 @@ public class DisplayNewOfficerActivity extends AppCompatActivity {
             sel = cb.getText().toString();
 
 
-           int idTeam = Integer.parseInt(sel);
+            int idTeam = Integer.parseInt(sel);
 
             if(cb.isChecked()){
-                o1 = new Officer(id, firstname, lastname,
-                        phone, type,idTeam);
+                o1 = new Officer();
+
+                o1.setFirstname(firstname);
+                o1.setLastname(lastname);
+                o1.setPhone(phone);
+                o1.setType(type);
+                o1.setIdTeam(idTeam);
 
                 ods.createOfficer(o1);
 
             }
+
+
+
         }
+
+
         startActivity(intent);
 
+
     }
+
+
 }

@@ -11,11 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.lionel.police_app.backend.constructors.interventionApi.model.Intervention;
+import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Constructors.Intervention;
-import Constructors.Team;
 import DataSource.InterventionDataSource;
 import DataSource.TeamDataSource;
 
@@ -30,9 +31,10 @@ public class DisplayInfoInterventionActivity extends AppCompatActivity {
     private RadioButton hight, medium,low;
     private NewDataBaseHelper db;
     private CheckBox button;
-    // private TextView selectTeam,name ;
+    private InterventionDataSource ids;
     private Intent intent;
     private List<Intervention> interventions;
+    private Intervention intervention;
     private String type="";
     private List<CheckBox> rbl;
     private CheckBox cb;
@@ -164,8 +166,14 @@ public class DisplayInfoInterventionActivity extends AppCompatActivity {
             long idTeam = Integer.parseInt(sel);
 
             if(cb.isChecked()){
-                i1 = new Intervention(id,iname,type,idescription,idateB,idateE,ilocalisation,idTeam);
-
+                i1 = new Intervention();
+                i1.setInterName(iname);
+                i1.setInterPriority(type);
+                i1.setIntDescription(idescription);
+                i1.setDateBegin(idateB);
+                i1.setDateEnd(idateE);
+                i1.setLocalisation(ilocalisation);
+                i1.setIdTeam(idTeam);
 
                 ids.createIntervention(i1);
 
@@ -180,41 +188,17 @@ public class DisplayInfoInterventionActivity extends AppCompatActivity {
 
     }
 
-    /** Called when officer click submit intervention button */
-/**   public void submitIntervention(View view) {
-
- Intent intent = new Intent(this, DisplayInterventionsActivity.class);
-
- InterventionDataSource ids = new InterventionDataSource(this);
-
- List<Intervention> interventions = new ArrayList<Intervention>();
-
- interventions = ids.getAllInterventions();
- id = interventions.size()+1;
-
- name = (EditText) findViewById(R.id.name);
- iname = name.getText().toString();
-
- dateB = (EditText) findViewById(R.id.dateB);
- idateB = dateB.getText().toString();
-
- dateE = (EditText) findViewById(R.id.dateE);
- idateE = dateE.getText().toString();
-
- localisation = (EditText) findViewById(R.id.localisation);
- ilocalisation = localisation.getText().toString();
-
- description = (EditText) findViewById(R.id.description);
- idescription = description.getText().toString();
-
- Intervention i1 = new Intervention(id, iname,"red",idescription,idateB,idateE,ilocalisation,1,2);
-
- ids.createIntervention(i1);
-
- startActivity(intent);
+    public void deleteIntervention(View view){
 
 
- }**/
+        Intent intent = new Intent(this, DisplayInterventionsActivity.class);
+        startActivity(intent);
+    }
+    public void updateIntervention(View view){
 
+
+        Intent intent = new Intent(this, DisplayInterventionsActivity.class);
+        startActivity(intent);
+    }
 
 }

@@ -12,7 +12,9 @@ import android.view.View;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity{
+
+public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

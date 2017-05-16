@@ -5,16 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.lionel.police_app.backend.constructors.interventionApi.model.Intervention;
+import com.example.lionel.police_app.backend.constructors.officerApi.model.Officer;
+import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Constructors.Intervention;
-import Constructors.Officer;
-import Constructors.Team;
 import DataSource.InterventionDataSource;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
@@ -55,13 +57,16 @@ public class DisplayNewTeamActivity extends AppCompatActivity {
 
             // Add Buttons
             final RadioButton button = new RadioButton(this);
-            int btnId = (int) officers.get(i).getId_Officer();
+            long btnId = officers.get(i).getIdOfficer();
             String s = officers.get(i).getLastname();
             button.setText(s);
-            button.setId(btnId);
-            //Ajout de l'action listener
+            button.setId((int)btnId);
+            for (int j = i + 1; j < officers.size(); j++) {
+                if (officers.get(i).getPhone().equals(officers.get(j).getPhone())) {
+                    i = i + 1;
+                }
 
-            //set onclick
+            }
 
             chief.addView(button);
         }
@@ -78,15 +83,20 @@ public class DisplayNewTeamActivity extends AppCompatActivity {
         for (int i = 0; i < officers1.size(); i++) {
 
             // Add Buttons
-            final RadioButton button = new RadioButton(this);
-            int btnId = (int) officers.get(i).getId_Officer();
+            final CheckBox button = new CheckBox(this);
+            long btnId = officers.get(i).getIdOfficer();
             String s = officers1.get(i).getLastname();
             button.setText(s);
-            button.setId(btnId);
+            button.setId((int)btnId);
             //Ajout de l'action listener
 
             //set onclick
+            for (int j = i + 1; j < officers.size(); j++) {
+                if (officers.get(i).getPhone().equals(officers.get(j).getPhone())) {
+                    i = i + 1;
+                }
 
+            }
             composants.addView(button);
         }
 
@@ -104,11 +114,17 @@ public class DisplayNewTeamActivity extends AppCompatActivity {
        for (int i = 0; i < interventions.size(); i++) {
 
             // Add Buttons
-            RadioButton button = new RadioButton(this);
+           CheckBox button = new CheckBox(this);
             String s = interventions.get(i).getInterName();
             button.setText(s);
            button.setTransitionName(s+i);
+           for(int j=i+1;j<interventions.size();j++){
+               if(interventions.get(i).getInterName().equals(interventions.get(j).getInterName())){
 
+                   i=i+1;
+               }
+
+           }
             inter.addView(button);
 
 
@@ -147,7 +163,9 @@ public class DisplayNewTeamActivity extends AppCompatActivity {
         id = teams.size()+10;
 
 
-        Team t1 = new Team(id,name,"David");
+        Team t1 = new Team();
+        t1.setTeamChief(name);
+        t1.setTeamComposant("David");
 
         tds.createTeam(t1);
 

@@ -11,11 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.lionel.police_app.backend.constructors.interventionApi.model.Intervention;
+import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Constructors.Intervention;
-import Constructors.Team;
 import DataSource.InterventionDataSource;
 import DataSource.TeamDataSource;
 
@@ -165,8 +166,14 @@ public class DisplayNewInterventionActivity extends AppCompatActivity {
             long idTeam = Integer.parseInt(sel);
 
             if(cb.isChecked()){
-                i1 = new Intervention(id,iname,type,idescription,idateB,idateE,ilocalisation,idTeam);
-
+                i1 = new Intervention();
+                i1.setInterName(iname);
+                i1.setInterPriority(type);
+                i1.setIntDescription(idescription);
+                i1.setDateBegin(idateB);
+                i1.setDateEnd(idateE);
+                i1.setLocalisation(ilocalisation);
+                i1.setIdTeam(idTeam);
 
                 ids.createIntervention(i1);
 

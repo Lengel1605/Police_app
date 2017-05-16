@@ -8,10 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.lionel.police_app.backend.constructors.interventionApi.model.Intervention;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Constructors.Intervention;
 import DataSource.InterventionDataSource;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
@@ -53,6 +54,13 @@ public class DisplayInterventionsActivity extends AppCompatActivity {
             Button button = new Button(this);
             String s = interventions.get(i).getInterName();
             button.setText(s);
+            for(int j=i+1;j<interventions.size();j++){
+                if(interventions.get(i).getInterName().equals(interventions.get(j).getInterName())){
+
+                    i=i+1;
+                }
+
+            }
             linearLayout.addView(button);
 
             button.setOnClickListener(new View.OnClickListener() {

@@ -7,11 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.david.police_app.NewDataBaseHelper;
 import com.example.david.police_app.NewPoliceDB;
+import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import Constructors.Team;
 
 public class TeamDataSource {
     private SQLiteDatabase db;
@@ -104,7 +103,7 @@ public class TeamDataSource {
 //voir!!!!!!!!!
     public String[] getAllSpinnerContent(){
 
-        String query = "SELECT"+NewPoliceDB.TableTeam.TEAM_ID+" FROM " + NewPoliceDB.TableTeam.TABLE_TEAM;
+        String query = "SELECT"+ NewPoliceDB.TableTeam.TEAM_ID+" FROM " + NewPoliceDB.TableTeam.TABLE_TEAM;
         Cursor cursor = this.db.rawQuery(query, null);
         ArrayList<String> spinnerContent = new ArrayList<String>();
         if(cursor.moveToFirst()){

@@ -8,10 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Constructors.Team;
 import DataSource.InterventionDataSource;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;

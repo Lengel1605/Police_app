@@ -11,11 +11,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.lionel.police_app.backend.constructors.officerApi.model.Officer;
+import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Constructors.Officer;
-import Constructors.Team;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
 
@@ -104,16 +105,16 @@ public class DisplayInfosOfficerActivity extends AppCompatActivity{
             button.setText(s);
 
             linearLayout.addView(button);
-            if (s.equals(String.valueOf(officer.getId_Team()))) {
+            if (s.equals(String.valueOf(officer.getIdTeam()))) {
                 button.setChecked(true);
 
 
             }
             else{
                 //boucle to click all teams to the officer
-                for(int k=officer.getId_Team(); k<officersToShow.size();k++) {
+                for(int k=officer.getIdTeam(); k<officersToShow.size();k++) {
                     if(officersToShow.get(k).getPhone().equals(officer.getPhone())){
-                        if (s.equals(String.valueOf(officersToShow.get(k).getId_Team()))) {
+                        if (s.equals(String.valueOf(officersToShow.get(k).getIdTeam()))) {
                             button.setChecked(true);
 
                         }
@@ -144,7 +145,7 @@ public class DisplayInfosOfficerActivity extends AppCompatActivity{
         selectTeam = (TextView) findViewById(R.id.selectTeam);
         selectType = (TextView) findViewById(R.id.fn);
 
-       fn = (EditText) findViewById(R.id.fn);
+        fn = (EditText) findViewById(R.id.fn);
         firstname = fn.getText().toString();
 
         ln = (EditText) findViewById(R.id.ln);
@@ -215,64 +216,21 @@ public class DisplayInfosOfficerActivity extends AppCompatActivity{
             int idTeam = Integer.parseInt(sel);
 
             if(cb.isChecked()){
-                o1 = new Officer(id, firstname, lastname,
-                        phone, type,idTeam);
+                o1 = new Officer();
+                o1.setFirstname(firstname);
+                o1.setLastname(lastname);
+                o1.setPhone(phone);
+                o1.setType(type);
+                o1.setIdTeam(idTeam);
 
                 ods.createOfficer(o1);
 
             }
 
-
-
         }
 
-
         startActivity(intent);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
-        int rbTypeId = rgType.getCheckedRadioButtonId();
-        officer.setLastname(txtLastname.getText().toString());
-        officer.setFirstname(txtFirstname.getText().toString());
-        officer.setPhone(txtPhone.getText().toString());
-        officer.setType(((RadioButton) findViewById(rbTypeId)).getText().toString());
-        officer.setId_Team(1);
-
-        ods.updateOfficer(officer);
-
-        Intent intent = new Intent(this, DisplayOfficersActivity.class);
-        startActivity(intent);
-**/
     }
 
     public void deleteInfos(View view){

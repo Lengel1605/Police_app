@@ -7,11 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.david.police_app.NewDataBaseHelper;
 import com.example.david.police_app.NewPoliceDB;
+import com.example.lionel.police_app.backend.constructors.interventionApi.model.Intervention;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import Constructors.Intervention;
 
 
 public class InterventionDataSource {
