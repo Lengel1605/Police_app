@@ -6,6 +6,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="8dp"
+        android:text="Officer information"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="Officer information"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/Delete"
+        android:layout_width="86dp"
+        android:layout_height="41dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_red_dark"
+        android:onClick="deleteInfos"
+        android:text="@string/delete"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="86dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="8dp"
+        android:layout_weight="1"
+        android:onClick="updateInfos"
+        android:text="@string/update"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <ScrollView
+        android:layout_width="294dp"
+        android:layout_height="357dp"
+        android:fillViewport="true"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.8"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/Delete">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1">
         <EditText
             android:id="@+id/fn"
             android:layout_width="220dp"
@@ -57,22 +120,6 @@
             android:layout_marginEnd="8dp" />
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="Officer information"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Officer information" />
-
-        <TextView
             android:id="@+id/selectType"
             android:layout_width="31dp"
             android:layout_height="20dp"
@@ -87,68 +134,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ph"
             tools:text="Type" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="Officer information"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/selectTeam"
-            android:layout_width="128dp"
-            android:layout_height="17dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="Team"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-            tools:text="Team" />
-
-        <Button
-            android:id="@+id/Delete"
-            android:layout_width="86dp"
-            android:layout_height="41dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_red_dark"
-            android:onClick="deleteInfos"
-            android:text="@string/delete"
-            app:layout_constraintHorizontal_bias="0.717"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView5" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="86dp"
-            android:layout_height="49dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="26dp"
-            android:layout_weight="1"
-            android:onClick="updateInfos"
-            android:text="@string/update"
-            app:layout_constraintHorizontal_bias="0.297"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView5" />
 
         <ScrollView
             android:id="@+id/scrollView3"
@@ -210,62 +195,28 @@
                     android:layout_height="40dp"
                     android:text="@string/captain" />
 
-                <RadioButton
-                    android:id="@+id/major_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/major" />
-
-                <RadioButton
-                    android:id="@+id/colonel_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/colonel" />
-
-                <RadioButton
-                    android:id="@+id/inspector_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/inspector" />
-
-                <RadioButton
-                    android:id="@+id/deputy_chief_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/deputyChief"
-                    tools:layout_editor_absoluteX="169dp"
-                    tools:layout_editor_absoluteY="383dp" />
-
-                <RadioButton
-                    android:id="@+id/commisioner_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/commissioner"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:layout_editor_absoluteY="392dp" />
-
-                <RadioButton
-                    android:id="@+id/assistant_chief_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/assistantChief"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:layout_editor_absoluteY="312dp" />
-
             </RadioGroup>
         </ScrollView>
 
+        <TextView
+            android:id="@+id/selectTeam"
+            android:layout_width="128dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="Team"
+            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView3"
+            tools:text="Team" />
+
         <ScrollView
             android:id="@+id/scrollView5"
-            android:layout_width="141dp"
+            android:layout_width="match_parent"
             android:layout_height="91dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -273,7 +224,8 @@
             app:layout_constraintHorizontal_bias="0.662"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectTeam">
+            app:layout_constraintTop_toBottomOf="@+id/selectTeam"
+            android:layout_weight="0.41">
 
             <LinearLayout
                 android:id="@+id/team"
@@ -281,5 +233,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
         </ScrollView>
+
+
+    </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        changeLanguage(this,sharedPrefs.getString("pref_lang", "en"));
+        changeLanguage(this, sharedPrefs.getString("pref_lang", "en"));
         setContentView(R.layout.activity_main);
 
 
@@ -31,23 +31,24 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.action_settings){
-            Intent intent = new Intent(this,SettingsActivity.class);
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-    public void changeLanguage(Context context, String lang){
+
+    public void changeLanguage(Context context, String lang) {
         Locale myLocale = new Locale(lang);
         Locale.setDefault(myLocale);
         android.content.res.Configuration config = new android.content.res.Configuration();
@@ -56,29 +57,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /** Called when the user taps the officers button**/
-    public void showOfficers(View view){
+    /**
+     * Called when the user taps the officers button
+     **/
+    public void showOfficers(View view) {
         //show officers
         Intent intent = new Intent(this, DisplayOfficersActivity.class);
         startActivity(intent);
     }
 
-    /** Called when the user taps the team button**/
-    public void showTeams(View view){
+    /**
+     * Called when the user taps the team button
+     **/
+    public void showTeams(View view) {
         //show teams
         Intent intent = new Intent(this, DisplayTeamsActivity.class);
         startActivity(intent);
     }
 
-    /** Called when the user taps the intervention button**/
-    public void showInterventions(View view){
+    /**
+     * Called when the user taps the intervention button
+     **/
+    public void showInterventions(View view) {
         //show interventions
         Intent intent = new Intent(this, DisplayInterventionsActivity.class);
         startActivity(intent);
     }
 
-    /** Called when user taps one Officer button**/
-    public void showOfficer(View view) {
-        // Do something in response to button
-    }
+
 }

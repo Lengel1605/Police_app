@@ -7,10 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.david.police_app.NewDataBaseHelper;
 import com.example.david.police_app.NewPoliceDB;
-import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Constructors.Team;
 
 public class TeamDataSource {
     private SQLiteDatabase db;
@@ -77,49 +78,38 @@ public class TeamDataSource {
 
         return team;
     }
+
     /**
-     *  Update a Team
+     * Update a Team
      */
-    public void updateTeam(Team team){
+    public void updateTeam(Team team) {
 
         ContentValues values = new ContentValues();
         values.put(NewPoliceDB.TableTeam.TEAM_ID, team.getIdTeam());
         values.put(NewPoliceDB.TableTeam.TEAM_CHIEF, team.getTeamChief());
 
         this.db.update(NewPoliceDB.TableTeam.TABLE_TEAM, values, NewPoliceDB.TableTeam.TEAM_ID + " = ?",
-                new String[] { String.valueOf(team.getIdTeam()) });
+                new String[]{String.valueOf(team.getIdTeam())});
     }
-
 
 
     /**
      * Delete a Team
      */
-    public void deleteTeam(long id) {
+
+    public void deleteTeam(Team team) {
+
+        //delete the officer
+        this.db.delete(NewPoliceDB.TableTeam.TABLE_TEAM, NewPoliceDB.TableTeam.TEAM_CHIEF + " = ?",
+                new String[]{String.valueOf(team.getTeamChief())});
+
+    }
+
+
+    public void deleteTeam(int id) {
         this.db.delete(NewPoliceDB.TableTeam.TABLE_TEAM, NewPoliceDB.TableTeam.TEAM_ID + " = ?",
                 new String[]{String.valueOf(id)});
     }
-
-//voir!!!!!!!!!
-    public String[] getAllSpinnerContent(){
-
-        String query = "SELECT"+ NewPoliceDB.TableTeam.TEAM_ID+" FROM " + NewPoliceDB.TableTeam.TABLE_TEAM;
-        Cursor cursor = this.db.rawQuery(query, null);
-        ArrayList<String> spinnerContent = new ArrayList<String>();
-        if(cursor.moveToFirst()){
-            do{
-                String word = cursor.getString(cursor.getColumnIndexOrThrow("content"));
-                spinnerContent.add(word);
-            }while(cursor.moveToNext());
-        }
-        cursor.close();
-
-        String[] allSpinner = new String[spinnerContent.size()];
-        allSpinner = spinnerContent.toArray(allSpinner);
-
-        return allSpinner;
-    }
-
 
 
 }

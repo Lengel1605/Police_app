@@ -31,8 +31,8 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
         version = "v1",
         resource = "officer",
         namespace = @ApiNamespace(
-                ownerDomain = "Constructors.backend.police_app.Lionel.example.com",
-                ownerName = "Constructors.backend.police_app.Lionel.example.com",
+                ownerDomain = "backend.police_app.Lionel.example.com",
+                ownerName = "backend.police_app.Lionel.example.com",
                 packagePath = ""
         )
 )
@@ -81,7 +81,7 @@ public class OfficerEndpoint {
         //
         // If your client provides the ID then you should probably use PUT instead.
         ofy().save().entity(officer).now();
-        logger.info("Created Officer.");
+        logger.info("Created Officer with ID: " + officer.getIdOfficer());
 
         return ofy().load().entity(officer).now();
     }

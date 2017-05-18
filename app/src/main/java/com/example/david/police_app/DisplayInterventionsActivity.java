@@ -8,17 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.example.lionel.police_app.backend.constructors.interventionApi.model.Intervention;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import Constructors.Intervention;
 import DataSource.InterventionDataSource;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
 
 
 public class DisplayInterventionsActivity extends AppCompatActivity {
+    TeamDataSource tds;
+    public static final String EXTRA_MESSAGE2 = "com.example.david.police_app.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +41,32 @@ public class DisplayInterventionsActivity extends AppCompatActivity {
 
 
         //insert interventions
-/**
-        Intervention i1  = new Intervention(1, "a", "b", "c", "d", "e", "f", 3, 2);
-        ids.createIntervention(i1);
+
+        //Intervention i1  = new Intervention(1, "a", "b", "c", "d", "e", "f", 3, 2);
+        //ids.deleteIntervention(5);//createIntervention(i1);
 
 
-**/
+
+
         interventions=ids.getAllInterventions();
 
         for (int i = 0; i < interventions.size(); i++) {
 
             // Add Buttons
             Button button = new Button(this);
-            String s = interventions.get(i).getInterName();
+            String s = String.valueOf(interventions.get(i).getInterName());
+           // String s = String.valueOf(interventions.get(i).getIdIntervention());
+           // String s = String.valueOf(interventions.get(i).getIdTeam());
+          //  String s = String.valueOf(interventions.get(i).getIdIntervention());
+                    //.getInterName();
             button.setText(s);
+           final String idIntervention = String.valueOf(interventions.get(i).getIdIntervention());
+
+         /**   Intent intent = getIntent();
+            String message = intent.getStringExtra(DisplayInterventionsActivity.EXTRA_MESSAGE2);
+            Button b = new Button(this);
+            b.setText(String.valueOf(((Button)view).getText()););**/
+
             for(int j=i+1;j<interventions.size();j++){
                 if(interventions.get(i).getInterName().equals(interventions.get(j).getInterName())){
 
@@ -66,7 +79,7 @@ public class DisplayInterventionsActivity extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showInfosIntervention(view);
+                    showInfosIntervention(view, idIntervention);
                 }
             });
 
@@ -82,9 +95,11 @@ public class DisplayInterventionsActivity extends AppCompatActivity {
     }
 
     /** Called when the user taps the show_intervention button**/
-    public void showInfosIntervention(View view){
+    public void showInfosIntervention(View view, String idIntervention){
         //show interventions
         Intent intent = new Intent(this, DisplayInfoInterventionActivity.class);
+        String message = String.valueOf(idIntervention);
+        intent.putExtra(EXTRA_MESSAGE2, message);
         startActivity(intent);
     }
 

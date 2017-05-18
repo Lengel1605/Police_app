@@ -4,18 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.lionel.police_app.backend.constructors.interventionApi.model.Intervention;
-import com.example.lionel.police_app.backend.constructors.officerApi.model.Officer;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import DataSource.InterventionDataSource;
+import Constructors.Officer;
+import Constructors.Team;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
 
@@ -31,9 +30,18 @@ public class DisplayInfosTeamActivity extends AppCompatActivity{
     //getTeamchief(); getTeamComposants
     private int id;
     private OfficerDataSource ods;
+    private TeamDataSource tds;
+    private List<Team> teams;
+    private Team team;
+    private List<CheckBox> rbl,rbl1;
+    private CheckBox cb;
+    private String sel;
+
+    private RadioGroup rg;
+    private String sel1;
 
     private RadioGroup chief;
-
+    private LinearLayout composants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,58 +49,73 @@ public class DisplayInfosTeamActivity extends AppCompatActivity{
         setContentView(R.layout.info_team_activity);
 
 
+        tds = new TeamDataSource(this);
+        teams=tds.getAllTeams();
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(DisplayTeamsActivity.EXTRA_MESSAGE1);
+        team = tds.getTeamById(Integer.parseInt(message));
+
+
+        id= (int)team.getIdTeam();
+
         // Create a RadioGroup element
         chief = (RadioGroup) findViewById(R.id.chief);
         chief.setOrientation(RadioGroup.VERTICAL);
+        String teamChief;
 
 
         NewDataBaseHelper db = new NewDataBaseHelper(this);
         ods = new OfficerDataSource(this);
-        TeamDataSource tds = new TeamDataSource(this);
-        InterventionDataSource ids = new InterventionDataSource(this);
         List<Officer> officers = new ArrayList<Officer>();
+        officers=ods.getAllOfficers();
+
+        List<Team> teamsToShow = new ArrayList<Team>();
+        teamsToShow=tds.getAllTeams();
 
 
-        officers = ods.getAllOfficers();
-
+        //boucle to show chiefs
         for (int i = 0; i < officers.size(); i++) {
 
-            // Add Buttons
-            final RadioButton button = new RadioButton(this);
-            long btnId = officers.get(i).getIdOfficer();
-            String s = officers.get(i).getLastname();
-            button.setText(s);
-            button.setId((int)btnId);
-            for (int j = i + 1; j < officers.size(); j++) {
-                if (officers.get(i).getPhone().equals(officers.get(j).getPhone())) {
-                    i = i + 1;
+            // Add RadioButtons
+            RadioButton button = new RadioButton(this);
+            String s =String.valueOf(officers.get(i).getLastname());
+
+            button.setText(s.toUpperCase());
+            String chiefString = team.getTeamChief();
+
+            if(chiefString.toUpperCase().equals(s.toUpperCase()))
+                button.setChecked(true);
+            //boucle to show just one each officer
+            for(int j=i+1;j<officers.size();j++){
+                if(officers.get(i).getPhone().equals(officers.get(j).getPhone())){
+
+                    i=i+1;
                 }
 
             }
-
             chief.addView(button);
+
         }
 
         // Create a LinearLayout element
-        LinearLayout composants = (LinearLayout) findViewById(R.id.composants);
+        composants = (LinearLayout) findViewById(R.id.composants);
 
+//boucle to show composants
+        for (int i = 0; i < officers.size(); i++) {
 
-        List<Officer> officers1 = new ArrayList<Officer>();
+            // Add RadioButtons
+            CheckBox button = new CheckBox(this);
+            String s =String.valueOf(officers.get(i).getLastname());
+            button.setId((int) officers.get(i).getIdOfficer());
+            button.setText(s.toUpperCase());
+            //String composant = team.getTeamComposant();
 
-
-        officers1 = ods.getAllOfficers();
-
-        for (int i = 0; i < officers1.size(); i++) {
-
-            // Add Buttons
-            final CheckBox button = new CheckBox(this);
-            long btnId = officers.get(i).getIdOfficer();
-            String s = officers1.get(i).getLastname();
-            button.setText(s);
-            button.setId((int)btnId);
-            //Ajout de l'action listener
-
-            //set onclick
+            if(officers.get(i).getIdTeam() == team.getIdTeam()) {
+                button.setChecked(true);
+                Button delete = (Button) findViewById(R.id.button5);
+                delete.setEnabled(false);
+            }
+            //boucle to show just one each officer
             for (int j = i + 1; j < officers.size(); j++) {
                 if (officers.get(i).getPhone().equals(officers.get(j).getPhone())) {
                     i = i + 1;
@@ -100,50 +123,72 @@ public class DisplayInfosTeamActivity extends AppCompatActivity{
 
             }
             composants.addView(button);
-        }
-
-        // Create a LinearLayout element
-        LinearLayout inter = (LinearLayout) findViewById(R.id.inter);
-        // interventionsLayout.setOrientation(LinearLayout.VERTICAL);
-
-        List<Intervention> interventions = new ArrayList<Intervention>();
-
-
-        //insert interventions
-
-        interventions=ids.getAllInterventions();
-
-        for (int i = 0; i < interventions.size(); i++) {
-
-            // Add Buttons
-            CheckBox button = new CheckBox(this);
-            String s = interventions.get(i).getInterName();
-            button.setText(s);
-            button.setTransitionName(s+i);
-            for(int j=i+1;j<interventions.size();j++){
-                if(interventions.get(i).getInterName().equals(interventions.get(j).getInterName())){
-
-                    i=i+1;
-                }
-
-            }
-            inter.addView(button);
-
-
 
         }
 
     }
     public void deleteTeam(View view){
 
+        //long id = team.getIdTeam();
+
+
+        tds.deleteTeam(id);
+
 
         Intent intent = new Intent(this, DisplayTeamsActivity.class);
+
         startActivity(intent);
     }
+
     public void updateTeam(View view){
 
+        Intent intent = new Intent(this,DisplayTeamsActivity.class);
+        teams = new ArrayList<Team>();
+        teams = tds.getAllTeams();
 
-        Intent intent = new Intent(this, DisplayTeamsActivity.class);
+        rbl = new ArrayList<CheckBox>();
+        rbl1 = new ArrayList<CheckBox>();
+
+        LinearLayout llt = (LinearLayout) findViewById(R.id.composants);
+
+        RadioGroup rg = (RadioGroup) findViewById(R.id.chief);
+
+        String chiefString="";
+        sel = "";
+
+        ArrayList<Officer> selComposants = new ArrayList<Officer>();
+
+        for(int i = 0; i < llt.getChildCount(); i++){
+            cb = (CheckBox)llt.getChildAt(i);
+
+            Officer off = ods.getOfficerById(cb.getId());
+            off.setIdTeam(0);
+            if(cb.isChecked()){
+                sel = cb.getText().toString();
+                off.setIdTeam((int) team.getIdTeam());
+            }
+            selComposants.add(off);
+
+        }
+        for(int i = 0; i < rg.getChildCount(); i++){
+
+            RadioButton rb = (RadioButton) rg.getChildAt(i);
+
+            if(rb.isChecked()){
+                chiefString = rb.getText().toString();
+
+            }
+
+        }
+
+
+        for(int i = 0; i < selComposants.size();i++){
+            ods.updateOfficer(selComposants.get(i));
+        }
+
+        Team t1 = new Team(team.getIdTeam(), chiefString,sel);
+
+        tds.updateTeam(t1);
         startActivity(intent);
     }
 

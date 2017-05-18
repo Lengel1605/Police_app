@@ -8,11 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.example.lionel.police_app.backend.constructors.officerApi.model.Officer;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import Constructors.Officer;
 import DataSource.InterventionDataSource;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
@@ -29,11 +28,9 @@ public class DisplayOfficersActivity extends AppCompatActivity {
         setContentView(R.layout.officers_activity);
 
 
-
         // Create a LinearLayout element
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-
 
 
         NewDataBaseHelper db = new NewDataBaseHelper(this);
@@ -42,27 +39,16 @@ public class DisplayOfficersActivity extends AppCompatActivity {
         InterventionDataSource ids = new InterventionDataSource(this);
         List<Officer> officers = new ArrayList<Officer>();
 
-        //insert officers
-/**
- Officer o1 = new Officer(1, "David", "Cano",
- "65165", "Officer");
- Officer o2 = new Officer(1, "toto", "toto",
- "65165", "Assistant Chief");
- Officer o3 = new Officer(1, "titi", "titi",
- "65165", "Major");
- ods.createOfficer(o1);
- ods.createOfficer(o2);
- ods.createOfficer(o3);
- **/
-        officers=ods.getAllOfficers();
+
+        officers = ods.getAllOfficers();
 
 
-        for(int i=0;i<officers.size();i++){
+        for (int i = 0; i < officers.size(); i++) {
             final Button button = new Button(this);
-            long btnId = officers.get(i).getIdOfficer();
+            int btnId = (int) officers.get(i).getIdOfficer();
             String s = officers.get(i).getLastname();
             button.setText(s);
-            button.setId((int)btnId);
+            button.setId(btnId);
             //Ajout de l'action listener
 
             button.setOnClickListener(new View.OnClickListener() {
@@ -71,10 +57,10 @@ public class DisplayOfficersActivity extends AppCompatActivity {
                     showOfficer(view);
                 }
             });
-            for(int j=i+1;j<officers.size();j++){
-                if(officers.get(i).getPhone().equals(officers.get(j).getPhone())){
+            for (int j = i + 1; j < officers.size(); j++) {
+                if (officers.get(i).getPhone().equals(officers.get(j).getPhone())) {
 
-                    i=i+1;
+                    i = i + 1;
                 }
 
             }
@@ -84,30 +70,26 @@ public class DisplayOfficersActivity extends AppCompatActivity {
         }
     }
 
-    /** Called when the user taps a officers button**/
-    public void showOfficer(View view){
+    /**
+     * Called when the user taps a officers button
+     **/
+    public void showOfficer(View view) {
 
         Intent intent = new Intent(this, DisplayInfosOfficerActivity.class);
-        String message = String.valueOf(((Button)view).getId());
+        String message = String.valueOf(view.getId());
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
 
-    /** Called when the user taps the add_officers button**/
-    public void showNewOfficer(View view){
+    /**
+     * Called when the user taps the add_officers button
+     **/
+    public void showNewOfficer(View view) {
 
         Intent intent = new Intent(this, DisplayNewOfficerActivity.class);
         startActivity(intent);
     }
-
-    /** Called when the user taps the view_officers button**/
-    public void showInfosOfficer(View view){
-
-        Intent intent = new Intent(this, DisplayInfosOfficerActivity.class);
-        startActivity(intent);
-    }
-
 
 
 }

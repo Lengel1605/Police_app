@@ -1,13 +1,21 @@
-package Constructors;
+package com.example.Lionel.police_app.backend;
+
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
 
 import java.io.Serializable;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 /**
- * Created by David on 24.04.2017.
+ * Created by Lionel on 24.04.2017.
  */
 
+@Entity
+public class Officer {
 
-public class Officer implements Serializable {
+    @Id
     private long idOfficer;
     private String Firstname;
     private String Lastname;
@@ -15,20 +23,7 @@ public class Officer implements Serializable {
     private String Type;
     private int idTeam;
 
-    public Officer() {
-
-    }
-
-    public Officer(long idOfficer, String Firstname, String Lastname,
-                   String Phone, String Type, int idTeam) {
-
-        this.idOfficer = idOfficer;
-        this.Firstname = Firstname;
-        this.Lastname = Lastname;
-        this.Phone = Phone;
-        this.Type = Type;
-        this.idTeam = idTeam;
-
+    public Officer(){
 
     }
 
@@ -79,6 +74,10 @@ public class Officer implements Serializable {
     public void setIdTeam(int idTeam) {
         this.idTeam = idTeam;
     }
+
+
+
+
 
 
 }

@@ -1,19 +1,11 @@
-package com.example.Lionel.police_app.backend;
-
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+package Constructors;
 
 /**
- * Created by Lionel on 27.04.2017.
+ * Created by David on 27.04.2017.
  */
 
-@Entity
 public class Intervention {
 
-    @Id
     private long idIntervention;
     private String interName;
     private String intDescription;
@@ -22,12 +14,26 @@ public class Intervention {
     private int idTeam;
 
 
-    public Intervention(){
+    public Intervention() {
 
+    }
+
+    public Intervention(long idIntervention, String interName, String intDescription, String DateBegin, String Localisation, int idTeam) {
+
+        this.idIntervention = idIntervention;
+        this.interName = interName;
+        this.intDescription = intDescription;
+        this.dateBegin = DateBegin;
+        this.localisation = Localisation;
+        this.idTeam = idTeam;
     }
 
     public long getIdIntervention() {
         return idIntervention;
+    }
+
+    public void setIdIntervention(long idIntervention) {
+        this.idIntervention = idIntervention;
     }
 
     public String getInterName() {
@@ -69,7 +75,6 @@ public class Intervention {
     public void setIdTeam(int idTeam) {
         this.idTeam = idTeam;
     }
-
 
 
 }

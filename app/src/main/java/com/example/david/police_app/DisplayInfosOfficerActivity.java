@@ -11,12 +11,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.lionel.police_app.backend.constructors.officerApi.model.Officer;
-import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import Constructors.Officer;
+import Constructors.Team;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
 
@@ -128,10 +127,6 @@ public class DisplayInfosOfficerActivity extends AppCompatActivity{
 
     public void updateInfos(View view) {
 
-        ods.deleteOfficer(officer);
-
-
-
         intent = new Intent(this, DisplayOfficersActivity.class);
 
         OfficerDataSource ods = new OfficerDataSource(this);
@@ -140,10 +135,8 @@ public class DisplayInfosOfficerActivity extends AppCompatActivity{
 
         officers = ods.getAllOfficers();
 
-        id = officers.size();
-
-        selectTeam = (TextView) findViewById(R.id.selectTeam);
-        selectType = (TextView) findViewById(R.id.fn);
+        /**selectTeam = (TextView) findViewById(R.id.selectTeam);ddd
+        selectType = (TextView) findViewById(R.id.fn);**/
 
         fn = (EditText) findViewById(R.id.fn);
         firstname = fn.getText().toString();
@@ -216,14 +209,10 @@ public class DisplayInfosOfficerActivity extends AppCompatActivity{
             int idTeam = Integer.parseInt(sel);
 
             if(cb.isChecked()){
-                o1 = new Officer();
-                o1.setFirstname(firstname);
-                o1.setLastname(lastname);
-                o1.setPhone(phone);
-                o1.setType(type);
-                o1.setIdTeam(idTeam);
+                o1 = new Officer(officer.getIdOfficer(), firstname, lastname,
+                        phone, type,idTeam);
 
-                ods.createOfficer(o1);
+                ods.updateOfficer(o1);
 
             }
 

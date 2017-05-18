@@ -31,8 +31,8 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
         version = "v1",
         resource = "team",
         namespace = @ApiNamespace(
-                ownerDomain = "Constructors.backend.police_app.Lionel.example.com",
-                ownerName = "Constructors.backend.police_app.Lionel.example.com",
+                ownerDomain = "backend.police_app.Lionel.example.com",
+                ownerName = "backend.police_app.Lionel.example.com",
                 packagePath = ""
         )
 )

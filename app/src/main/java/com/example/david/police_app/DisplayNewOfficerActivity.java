@@ -1,6 +1,5 @@
 package com.example.david.police_app;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,86 +9,65 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import com.example.lionel.police_app.backend.constructors.officerApi.model.Officer;
-import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Constructors.Officer;
+import Constructors.Team;
 import DataSource.OfficerDataSource;
 import DataSource.TeamDataSource;
 
-
 public class DisplayNewOfficerActivity extends AppCompatActivity {
-    private EditText fn,ln,ph;
-    private String type="";
+    private EditText fn, ln, ph;
+    private String type = "";
     private int id;
-    private RadioButton officer_button,detective_button,sergeant_button,lieutenant_button,captain_button;
+    private RadioButton officer_button, detective_button, sergeant_button, lieutenant_button, captain_button;
     private OfficerDataSource ods;
     private TeamDataSource tds;
     private Officer officer;
-    private EditText txtLastname,txtFirstname,txtPhone;
-    private TextView selectTeam,selectType ;
+    private EditText txtLastname, txtFirstname, txtPhone;
     private RadioGroup rgType;
     private RadioGroup team;
-    private LinearLayout linearLayout,llt;
+    private LinearLayout linearLayout, llt;
     private NewDataBaseHelper db;
     private CheckBox button;
     private List<Team> teams;
     private List<Officer> officers;
     private Intent intent;
-    private List<CheckBox> rbl;
     private CheckBox cb;
     private String sel;
     private Officer o1;
-    private String firstname,lastname,phone;
-
-
+    private String firstname, lastname, phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newofficer_activity);
-
         linearLayout = (LinearLayout) findViewById(R.id.team);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-
         db = new NewDataBaseHelper(this);
         TeamDataSource tds = new TeamDataSource(this);
-
         teams = new ArrayList<Team>();
-
-        teams=tds.getAllTeams();
-
+        teams = tds.getAllTeams();
         for (int i = 0; i < teams.size(); i++) {
-
             button = new CheckBox(this);
-            String s =String.valueOf(teams.get(i).getIdTeam());
+            String s = String.valueOf(teams.get(i).getIdTeam());
             button.setText(s);
-
             linearLayout.addView(button);
         }
-
     }
 
-    /** Called when officer click submit button */
+    /**
+     * Called when officer click submit button
+     */
     public void submitOfficer(View view) {
-
-
         intent = new Intent(this, DisplayOfficersActivity.class);
-
         OfficerDataSource ods = new OfficerDataSource(this);
-
         officers = new ArrayList<Officer>();
-
         officers = ods.getAllOfficers();
-
         id = officers.size();
 
-        selectTeam = (TextView) findViewById(R.id.selectTeam);
-        selectType = (TextView) findViewById(R.id.fn);
 
         fn = (EditText) findViewById(R.id.fn);
         firstname = fn.getText().toString();
@@ -100,17 +78,17 @@ public class DisplayNewOfficerActivity extends AppCompatActivity {
         ph = (EditText) findViewById(R.id.ph);
         phone = ph.getText().toString();
 
-        if (fn.getText().length()==0){
+        if (fn.getText().length() == 0) {
             fn.setError("Please enter a firstname");
             return;
         }
 
-        if (ln.getText().length()==0){
+        if (ln.getText().length() == 0) {
             ln.setError("Please enter a lastname");
             return;
         }
 
-        if (ph.getText().length()==0){
+        if (ph.getText().length() == 0) {
             ph.setError("Please enter a valable Phone");
             return;
         }
@@ -124,56 +102,42 @@ public class DisplayNewOfficerActivity extends AppCompatActivity {
 
         captain_button = (RadioButton) findViewById(R.id.captain_button);
 
-        type ="";
-        if(officer_button.isChecked());
+        type = "";
+        if (officer_button.isChecked()) ;
         {
             type = "Officer";
         }
-        if(detective_button.isChecked())
-        {
+        if (detective_button.isChecked()) {
             type = "Detective";
         }
-        if(sergeant_button.isChecked())
-        {
+        if (sergeant_button.isChecked()) {
             type = "Sergeant";
         }
-        if(lieutenant_button.isChecked())
-        {
+        if (lieutenant_button.isChecked()) {
             type = "Lieutenant";
         }
-        if(captain_button.isChecked())
-        {
+        if (captain_button.isChecked()) {
             type = "Captain";
         }
-
-
-        rbl = new ArrayList<CheckBox>();///////////////////////////////////////////
 
 
         llt = (LinearLayout) findViewById(R.id.team);
 
 
-
-        for(int i = 0; i < llt.getChildCount(); i++){
-            cb = (CheckBox)llt.getChildAt(i);
+        for (int i = 0; i < llt.getChildCount(); i++) {
+            cb = (CheckBox) llt.getChildAt(i);
             sel = cb.getText().toString();
 
 
             int idTeam = Integer.parseInt(sel);
 
-            if(cb.isChecked()){
-                o1 = new Officer();
-
-                o1.setFirstname(firstname);
-                o1.setLastname(lastname);
-                o1.setPhone(phone);
-                o1.setType(type);
-                o1.setIdTeam(idTeam);
+            if (cb.isChecked()) {
+                o1 = new Officer(id, firstname, lastname,
+                        phone, type, idTeam);
 
                 ods.createOfficer(o1);
 
             }
-
 
 
         }

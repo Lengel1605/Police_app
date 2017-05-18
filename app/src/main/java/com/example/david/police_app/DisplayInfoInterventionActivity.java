@@ -11,12 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.lionel.police_app.backend.constructors.interventionApi.model.Intervention;
-import com.example.lionel.police_app.backend.constructors.teamApi.model.Team;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import Constructors.Intervention;
+import Constructors.Team;
 import DataSource.InterventionDataSource;
 import DataSource.TeamDataSource;
 
@@ -25,11 +24,10 @@ public class DisplayInfoInterventionActivity extends AppCompatActivity {
     private EditText name, dateB,dateE,localisation,description;
     private String iname,idateB,idateE,ilocalisation,idescription;
     private int id;
-    private LinearLayout linearLayout,llt;
+   // private LinearLayout linearLayout,llt;
     private RadioGroup team;
     private List<Team> teams;
     private RadioButton hight, medium,low;
-    private NewDataBaseHelper db;
     private CheckBox button;
     private InterventionDataSource ids;
     private Intent intent;
@@ -40,165 +38,153 @@ public class DisplayInfoInterventionActivity extends AppCompatActivity {
     private CheckBox cb;
     private String sel;
     private Intervention i1;
+    private RadioGroup rgType;
+    private TeamDataSource tds;
+    private NewDataBaseHelper db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+       super.onCreate(savedInstanceState);
         setContentView(R.layout.info_intervention_activity);
 
-        db = new NewDataBaseHelper(this);
-        TeamDataSource tds = new TeamDataSource(this);
-
-        linearLayout = (LinearLayout) findViewById(R.id.team);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-
-
-        teams = new ArrayList<Team>();
-        teams=tds.getAllTeams();
-
-        for (int i = 0; i < teams.size(); i++) {
-
-            button = new CheckBox(this);
-            String s =String.valueOf(teams.get(i).getIdTeam());
-            button.setText(s);
-
-            linearLayout.addView(button);
-        }
-
-    }
-    /** Called when officer click submit button */
-    public void submitIntervention(View view) {
-
-
-        intent = new Intent(this, DisplayInterventionsActivity.class);
-
-        InterventionDataSource ids = new InterventionDataSource(this);
-
-        interventions = new ArrayList<Intervention>();
-
+       ids = new InterventionDataSource(this);
         interventions = ids.getAllInterventions();
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(DisplayInterventionsActivity.EXTRA_MESSAGE2);
 
-        id = interventions.size();
+          intervention = ids.getInterventionById(Integer.parseInt(message));
+
+
 
         name = (EditText) findViewById(R.id.name);
-        iname = name.getText().toString();
+        name.setText(intervention.getInterName());
 
         description = (EditText) findViewById(R.id.description);
-        idescription = description.getText().toString();
+        description.setText(intervention.getIntDescription());
 
         dateB = (EditText) findViewById(R.id.dateB);
-        idateB = dateB.getText().toString();
-
-        dateE = (EditText) findViewById(R.id.dateE);
-        idateE = dateE.getText().toString();
+        dateB.setText(intervention.getDateBegin());
 
         localisation = (EditText) findViewById(R.id.localisation);
-        ilocalisation = localisation.getText().toString();
+        localisation.setText(intervention.getLocalisation());
 
 
-
-        if (name.getText().length()==0){
-            name.setError("Please enter a name");
-            return;
-        }
-
-        if (description.getText().length()==0){
-            idescription="";
-
-        }
-
-        if (dateB.getText().length()==0){
-            idateB ="";
-            return;
-        }
-        if (dateB.getText().length()==0){
-            idateB ="";
-            return;
-        }
-        if (dateB.getText().length()==0){
-            idateB ="";
-            return;
-        }
-        if (localisation.getText().length()==0){
-            ilocalisation ="";
-            return;
-        }
-        hight = (RadioButton) findViewById(R.id.hight);
-
-        medium = (RadioButton) findViewById(R.id.medium);
-
-        low = (RadioButton) findViewById(R.id.low);
+        LinearLayout llt = (LinearLayout) findViewById(R.id.teamI);
 
 
+        NewDataBaseHelper db = new NewDataBaseHelper(this);
+        ids = new InterventionDataSource(this);
+        TeamDataSource tds = new TeamDataSource(this);
+        InterventionDataSource ids = new InterventionDataSource(this);
+        List<Intervention> interventions = new ArrayList<Intervention>();
+        tds = new TeamDataSource(this);
 
-        type ="";
-        if(hight.isChecked());
-        {
-            type = "hihgt";
-        }
-        if(medium.isChecked())
-        {
-            type = "medium";
-        }
-        if(low.isChecked())
-        {
-            type = "low";
-        }
-        if (type.length()==0){
-            type = "low";
+        List<Intervention> interventionsToShow = new ArrayList<Intervention>();
+        interventionsToShow=ids.getAllInterventions();
 
-        }
+        List<Team> teams = new ArrayList<Team>();
+        teams=tds.getAllTeams();
 
+        //boucle to show teams
+        for (int i = 0; i < teams.size(); i++) {
 
+            // Add RadioButtons
+            CheckBox button = new CheckBox(this);
+            String s = String.valueOf(teams.get(i).getIdTeam());
+            button.setText(s);
 
-        rbl = new ArrayList<CheckBox>();
+           llt.addView(button);
 
-
-        llt = (LinearLayout) findViewById(R.id.team);
-
-
-
-        for(int i = 0; i < llt.getChildCount(); i++){
-            cb = (CheckBox)llt.getChildAt(i);
-            sel = cb.getText().toString();
+            if (s.equals(String.valueOf(intervention.getIdTeam()))) {
+                button.setChecked(true);
 
 
-            long idTeam = Integer.parseInt(sel);
+            }
+            else{
+                //boucle to click all teams to the officer
+                for(int k=(int)intervention.getIdTeam(); k<interventionsToShow.size();k++) {
+                    if(interventionsToShow.get(k).getInterName().equals(intervention.getInterName())){
+                        if (s.equals(String.valueOf(interventionsToShow.get(k).getIdTeam()))) {
+                            button.setChecked(true);
 
-            if(cb.isChecked()){
-                i1 = new Intervention();
-                i1.setInterName(iname);
-                i1.setInterPriority(type);
-                i1.setIntDescription(idescription);
-                i1.setDateBegin(idateB);
-                i1.setDateEnd(idateE);
-                i1.setLocalisation(ilocalisation);
-                i1.setIdTeam(idTeam);
-
-                ids.createIntervention(i1);
-
+                        }
+                    }
+                }
             }
 
 
-
         }
-
-
-        startActivity(intent);
 
     }
 
-    public void deleteIntervention(View view){
 
+    public void deleteIntervention(View view){
+ids.deleteIntervention(intervention);
 
         Intent intent = new Intent(this, DisplayInterventionsActivity.class);
         startActivity(intent);
     }
     public void updateIntervention(View view){
 
+        intent = new Intent(this,DisplayInterventionsActivity.class);
+        interventions = new ArrayList<Intervention>();
+        interventions = ids.getAllInterventions();
 
-        Intent intent = new Intent(this, DisplayInterventionsActivity.class);
+        name = (EditText) findViewById(R.id.name);
+        String iname = name.getText().toString();
+
+        description = (EditText) findViewById(R.id.description);
+        String idescription = description.getText().toString();
+
+        dateB = (EditText) findViewById(R.id.dateB);
+        String idateB = dateB.getText().toString();
+
+        localisation = (EditText) findViewById(R.id.localisation);
+        String ilocalisation = localisation.getText().toString();
+
+        if (name.getText().length()==0){
+            name.setError("Please enter a name for the intervention");
+            return;
+        }
+
+        if (description.getText().length()==0){
+            description.setError("Please enter a description");
+            return;
+        }
+
+        if (dateB.getText().length()==0){
+            dateB.setError("Please enter a date");
+            return;
+        }
+        if (localisation.getText().length()==0){
+            localisation.setError("Please enter a localisation");
+            return;
+        }
+
+        rbl = new ArrayList<CheckBox>();
+
+        LinearLayout llt = (LinearLayout) findViewById(R.id.teamI);
+
+        for(int i = 0; i < llt.getChildCount(); i++){
+            cb = (CheckBox)llt.getChildAt(i);
+            sel = cb.getText().toString();
+
+
+            int idTeam = Integer.parseInt(sel);
+
+            if(cb.isChecked()){
+                i1 = new Intervention(intervention.getIdIntervention(), iname, idescription,
+                        idateB, ilocalisation,idTeam);
+
+                ids.updateIntervention(i1);
+
+            }
+
+        }
+
         startActivity(intent);
+
     }
 
 }
